@@ -80,3 +80,15 @@ Route::group(['prefix' => 'messages'], function () {
     Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
     Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
 });
+
+
+///quizzer
+
+
+Route::get('/Quiz/{book}', 'QuizzerController@home')->name('quizzer.home');
+Route::get('/Quiz/question', 'QuizzerController@question')->name('quizzer.question');
+Route::post('/Quiz/question_handle', 'QuizzerController@question_handle')->name('quizzer.question_handle');
+Route::post('/Quiz/final_handle', 'QuizzerController@final_handle')->name('quizzer.final_handle');
+Route::get('/Quiz/review', 'QuizzerController@review')->name('quizzer.review');
+
+Route::get('/Quiz/questions/{book}', 'QuizzerController@question')->name('quizzer.question');

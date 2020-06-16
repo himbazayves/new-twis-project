@@ -16,4 +16,11 @@ class Book extends Model
 
         return $this->belongsTo(Level::class);
       }
+
+
+      function  questions(){
+
+
+        return $this->hasMany(Question::class);
+      }
 }
