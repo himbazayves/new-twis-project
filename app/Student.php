@@ -42,4 +42,18 @@ class Student extends Model
       return $this->hasOne('App\InvitedParent');
   }
 
+
+
+  function  results(){
+
+
+    return $this->hasMany(Result::class);
+  }
+
+  function  favoriteBooks(){
+
+
+    return $this->hasMany(FavoriteBook::class);
+  }
+
 }

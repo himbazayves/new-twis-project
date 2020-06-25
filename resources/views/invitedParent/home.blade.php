@@ -5,69 +5,27 @@
 @include('header.InvitedParent') 
 
 
-<div class="container">
+<div style="margin-top:100px" class="container">
+<div class="alert alert-success"> Hello, {{Auth::user()->userable->first_name}}. Have a nice moment!</div>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
+               
+<div class="alert">  <center> <h5> Your Kid</h5></center>  </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('school.complete_registration_handle') }}">
-                        @csrf
+                    
+               
 
-           
+                <div class="alert">Names: {{$kid->first_name}} {{$kid->last_name}}</div>
+                <div class="alert">School: {{$kid->school->name}} </div>
 
-                   
-
-                        
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Your names</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="email">
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right"> Your level</label>
-
-                            <div class="col-md-6">
-                                
-
-
-
-
-                                @error('level')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-
-                        
-                        
-
-                   
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                   Complete Plofile
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+
+                <div class="alert">  <center>  not your kid ?(<a href="#" class="text-primary">Report</a>) </center>  </div> 
             </div>
         </div>
+
     </div>
 </div>
 

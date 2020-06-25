@@ -11,6 +11,7 @@ use App\Level;
 use App\Teacher;
 use Mail;
 use Hash;
+use App\Student;
 use Validator;
 use App\InvitedParent;
 use App\Mail\TeacherAccountInfo;
@@ -44,6 +45,9 @@ class TeacherController extends Controller
         $name= $teacher->name;
 
         $level= $teacher->level_id;
+      
+        //$highPerformerStudent=$teacher->students->sortBy('columnName')->first();
+
 
         if( $name==NULL){
 
@@ -370,6 +374,83 @@ return view('teacher.students',['students'=>$students]);
       
 
       }
+
+
+      else{
+
+        return redirect()->back()->with('warning', 'The email does not exist');
+      
+      }
+
+
+
     }
+
+
+    
+    function studentView($student){
+      $student=Student::find($student);
+      $levels=Level::all();
+
+    return view('teacher.studentView',['student'=>$student,'levels'=>$levels]);
+  }
+
+  function editStudentAccount(Request $request){
+$request->validate([
+  'username'=>'required',
+]);
+
+$user=User::find($request->id);
+$user->username=$request->username;
+if($request->password!=NULL){
+
+  $user->password==Hash::make($request->password);
+}
+
+$user->save();
+
+return redirect()->back()->with('message', 'Student account info successfully updated!');
+
+  }
+
+
+  function editStudentProfile(Request $request){
+    $request->validate([
+      'first_name'=>'required',
+      'last_name'=>'required',
+      'level'=>'required',
+    ]);
+    
+    $student=Student::find($request->student_id);
+    $student->first_name=$request->first_name;
+    $student->last_name=$request->last_name;
+    $student->level_id=$request->level;
+   
+    
+    $student->save();
+    
+    return redirect()->back()->with('message', 'Student account info successfully updated!');
+    
+      }
+
+      function deleteStudentParent($parent){
+
+        $parent= InvitedParent::find($parent);
+        $user=$parent->user;
+
+        $user->delete();
+        $parent->delete();
+        return redirect()->back()->with('message', 'Student parent deleted sucessfully');
+      }
+
+      function deleteStudent($student){
+
+        $student= Student::find($student);
+      
+
+        $student->delete();
+      
+        return redirect()->back()->with('message', 'Student  deleted sucessfully');
+      }
                  
 }

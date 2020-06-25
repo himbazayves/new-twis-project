@@ -23,16 +23,6 @@
     </div>  
     @endif
 
-
-    <div style="margin-bottom:10px" class="row justify-content-center">
-
-      <div class="col-md-12"> 
-        <div class="form-group">
-      <input class="form-control" type="text" placeholder="shaka igitabo" > 
-      </div>
-
-    </div>
-  </div>
     <div class="row justify-content-center">
 
          
@@ -43,15 +33,15 @@
 <div class="col-md-6">
             
   <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="{{ Voyager::image($book->cover) }}" alt="Card image cap">
+      <img class="card-img-top" src="{{ Voyager::image($book->book->cover) }}" alt="Card image cap">
       <div class="card-body">
-      <h5 class="card-title">{{$book->name}}</h5>
-      <p class="card-text">{{$book->summary}}</p>
+      <h5 class="card-title">{{$book->book->name}}</h5>
+      <p class="card-text">{{$book->book->summary}}</p>
      
 
       <div class="btn-group" role="group" aria-label="Basic example">
-        <a style="border:1px solid orange;background:orange"  href="{{route('student.readBook', $book->id)}}" class="">Read</a>
-        <a style="" href="{{route('student.favoriteBookHandle', $book->id)}}" class="bg-primary">Add to favorite</a>
+        <a style="border:1px solid orange"  href="{{route('student.readBook', $book->id)}}" class="button">Read</a>
+      
       
       </div>
 

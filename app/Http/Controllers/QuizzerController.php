@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Book;
 use App\question;
 use App\Choice;
+use App\User;
 use Auth;
 use Student;
+use App\Result;
 use DB;
 
 class QuizzerController extends Controller
@@ -126,18 +128,49 @@ return redirect()->route('quizzer.final');
                 }
                
                };
-echo $score;
-               //print_r($answers);
-              
-  // echo  $input['1'];
-               // return view('quizzer.final');   
+
+               $request->session()->put('score', $score);
+               $user =User::find(Auth::user()->id);
+
+                $student=$user->userable;
+            
+
+               $newResult = Result::updateOrCreate([
+               
+                'student_id'   => $student->id,
+                'book_id'   =>$book,
+            ],[
+                'score'     => $request->session()->get('score'),
+               
+            ]);
+
+     return view('quizzer.final',['book'=>$book])
+      ->with('score', $request->session()->get('score')); 
+
                     }
 
             
-    function review (){
-
+    function review ($book){
+     $book=Book::find($book);
+    $questions=$book->questions;
 
      
-        return view('quizzer.review');   
+        return view('quizzer.review',['questions'=>$questions,'book'=>$book]);   
+            }
+
+
+            function studentQuizzes(){
+                $user =User::find(Auth::user()->id);
+
+                $student=$user->userable;
+                $quizzes=$student->results;
+
+
+                return view('quizzer.studentQuizzes',['quizzes'=>$quizzes]);
+
+
+
+
+               
             }
 }

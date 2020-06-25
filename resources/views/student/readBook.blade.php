@@ -26,4 +26,10 @@ $file = (json_decode($book->book)[0]->download_link);
     </div>
 </div>
 
+
+
+
+
+ 
+
 @endsection

@@ -8,7 +8,7 @@
 <div style="margin-top:100px" class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <a href="{{route('teacher.new_student')}}" class="button">New student</a>
+            <a href="{{route('teacher.new_student')}}" class="button"><i class="fas fa-plus"></i> New student</a>
             <div class="card">
            
 
@@ -28,6 +28,7 @@
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">Username</th>
+                            <th scope="col">Average score</th>
                             <th scope="col">Parent</th>
                             <th scope="col">Action</th>
                           </tr>
@@ -48,17 +49,41 @@
                             
                             
                             </td>
+
+                         
+                            <td>
+                              @if($student->results()->avg('score')==NULL)
+                             
+                              <i class="fas fa-exclamation-circle text-warning"></i>
+
+                              @else
+                              {{$student->results()->avg('score')}}
+                              @endif
+                             
+                            
+                            
+                            </td>
+                         
                             <td>   
                               
                               @if($student->invitedparent==NULL)
-                               NO
+                              <i class="fas fa-exclamation-circle text-warning"></i>
                                 @else
                                 <i class="fas fa-check-circle text-success"></i>
                               @endif
                             
                             
                             </td>
-                          <td> <a href="{{route('teacher.inviteParent',$student->id)}}"> invite parent</a> </td>
+                          <td> 
+                            
+                          
+                           
+                          <a style="background: red" href="{{route('teacher.deleteStudent',$student->id)}}" class="button"> <i class="far fa-trash-alt"></i> Delete</a>
+
+                      
+
+                          <a href="{{route('teacher.studentView',$student->id)}}" class="button"><i class="far fa-eye"></i> view</a>
+                          </td>
                           </tr>
                      
                           @endforeach

@@ -63,14 +63,32 @@ public function register(Request $request){
 
  $user_type=$request->input('user_type');    
  $email=$request->input('email');
- $name=$request->input('name');
+
  $username=$request->input('username');
  $password=Hash::make($request->input('password'));
- $phone=$request->input('phone');
- $address=$request->input('address');
 
+ $address=$request->input('address');
+ $user_type;
   
- $user= User::create(['username'=>$username,'email'=>$email,'password'=>$password]);
+
+ if($user_type==1){
+    $userable_type="App\School";
+    $user= User::create(['username'=>$username,'email'=>$email,'password'=>$password, 'userable_type'=>$userable_type]);
+
+    
+Auth::login($user,true);
+return redirect()->route('school.complete_registration');
+    
+ }
+
+ if($user_type==2){
+    $userable_type="App\Parent";
+    $user= User::create(['username'=>$username,'email'=>$email,'password'=>$password, 'userable_type'=>$userable_type]);
+    
+    Auth::login($user,true);
+    return redirect()->route('parent.home');
+ }
+ 
 
  //$user->email=$email;
  //$user->email=$email;
@@ -102,8 +120,10 @@ public function register(Request $request){
  
 //return redirect()->route('school.home');
 //return redirect($this->redirectPath('/school/home'))->with('message', 'You have registred susscfull!');
-Auth::login($user,true);
-return redirect()->route('school.complete_registration');
+
+
+//Auth::login($user,true);
+//return redirect()->route('school.complete_registration');
  
 
 //$tag = new Tag(['name' => 'Foo bar.']);

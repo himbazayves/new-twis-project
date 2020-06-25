@@ -37,7 +37,9 @@
 <!-- turbolinks -->
 
  
-<!-- end of turbolinks turbolinks -->
+<!-- livewire -->
+
+@livewireStyles
 <style>
 
 .was-validated :invalid ~ .invalid-feedback,
@@ -187,9 +189,9 @@
 </style>
 
 
-
 <!-- fontawesome -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
 </head>
 <body id="page-top" class="politics_version">
@@ -228,7 +230,7 @@
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     
 
-
+    @livewireScripts
 
 <script>
 
@@ -239,12 +241,6 @@
       </script>  
 
 
-<script>
 
-
-$(document).ready( function () {
-    $('.table').DataTable();
-} );
-</script>
 </body>
 </html>

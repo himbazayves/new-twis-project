@@ -19,6 +19,10 @@ class InvitedParentController extends Controller
         $invitedParent = $user->userable;
 
         $first_name= $invitedParent->first_name;
+        $user2= Auth::user();
+
+        $parent= $user2->userable;
+         $kid=$parent->student;
 
        // $level= $invitedParent->level_id;
 
@@ -30,7 +34,7 @@ class InvitedParentController extends Controller
         }
 
 
-        return view('invitedParent.home');
+        return view('invitedParent.home',['kid'=>$kid]);
     }
 
 
@@ -67,6 +71,14 @@ class InvitedParentController extends Controller
        
           return redirect()->route('invitedParent.home')->with('message', 'Your profile  is now complete you can now check your student performance and communicate with his teacher ');
         
+      }
+
+      function myKid(){
+       $user= Auth::user();
+
+       $parent= $user->userable;
+        $kid=$parent->student;
+        return view('invitedParent.myKid', ['kid'=>$kid, 'parent'=>$parent]);
       }
 
 

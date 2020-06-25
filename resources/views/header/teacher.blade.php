@@ -11,42 +11,48 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger " href="{{route('teacher.home')}}"><i class="fa fa-home">Home </i></a>
+            <a class="nav-link js-scroll-trigger " href="{{route('teacher.home')}}"><i class="fa fa-home text-light">Dashboard </i></a>
           </li>
           <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{route('teacher.students')}}">Students</a>
+          <a class="nav-link js-scroll-trigger" href="{{route('teacher.students')}}"><i class="fas fa-user-graduate text-light">Students</i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#pricing"><i class="fa fa-envelope">Messages</i></a>
+            <a class="nav-link js-scroll-trigger" href="#pricing"><i class="fa fa-envelope text-light">Messages</i></a>
           </li>
           
          
           
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Help</a>
+            <a class="nav-link js-scroll-trigger" href="#contact"><i class="fas fa-question text-light">Help</i></a>
           </li>
 
           <li class="nav-item">
 
-            <div class="dropdown">
-              <a class="dropbtn nav-link js-scroll-trigger">Account</a>
-              <div class="dropdown-content">
-                <a href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                
-                
-         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          @csrf
-      </form>
-                
-                <a href="#">Settings</a>
-                
+            <li class="nav-item">
+  
+              <div class="dropdown">
+                <a class="dropbtn nav-link js-scroll-trigger"> <i class="fas fa-user text-light">Account</i></a>
+                <div class="dropdown-content">
+                  <a href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt text-danger"></i>Logout</a>
+                  
+                  
+           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+                  
+      <a href="{{route('accounts.profile')}}"> <i class="fas fa-user-cog text-primary"></i>Profile</a>
+                  
+                </div>
               </div>
-            </div>
-          </li>
-
-         
-
-            <li class="nav-item"><img style="width: 50px; height:50px" src="{{ Voyager::image(Auth::user()->avatar) }}" alt=""></li>
+            </li>
+  
+            <?php 
+                        
+            $path=Auth::user()->avatar;
+            
+            ?>
+  
+              <li  class="nav-item"><img style="width: 60px; height:60px; border-radius: 50%;" src="{{asset($path)}}" alt=""></li>
         </ul>
       </div>
     </div>

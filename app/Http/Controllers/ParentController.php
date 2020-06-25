@@ -15,7 +15,7 @@ class ParentController extends Controller
     return view('parent.complete_register');
  }
     
-    function index(){
+    function home(){
 
 
     }

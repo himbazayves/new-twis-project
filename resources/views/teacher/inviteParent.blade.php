@@ -22,7 +22,7 @@
   @if(session()->has('warning'))
   <div class="alert alert-warning ">
       
-    <i class="fas fa-check-circle text-success"></i> {{ session()->get('warning') }}
+    <i class="fas fa-exclamation-circle text-warning"></i> {{ session()->get('warning') }}
     </div>
   @endif
 

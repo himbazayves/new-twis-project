@@ -23,4 +23,18 @@ class Book extends Model
 
         return $this->hasMany(Question::class);
       }
+
+
+      function  results(){
+
+
+        return $this->hasMany(Result::class);
+      }
+
+      
+  function  favoriteBooks(){
+
+
+    return $this->hasMany(FavoriteBook::class);
+  }
 }

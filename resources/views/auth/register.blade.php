@@ -2,13 +2,15 @@
 
 @section('content')
 @include('header.login') 
-<div class="container">
+<div style="margin-top:100px" class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header"> <center> {{ __('Register') }} </center></div>
 
                 <div class="card-body">
+
+                    <center>   <img style="width:170px ;margin-bottom:30px" class="img-fluid" src="frontend/images/logo.png" alt="" /></center>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -56,7 +58,7 @@
                      
 
 
-                               <div class="alert alert-success"> <center> Acount information</center></div>
+                               <div class="alert"> <center> Acount information</center></div>
                         
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -119,27 +121,12 @@
 
 
 
-                    <div id="parent">
-
-
-                        
-                      
-
-
-
-                        
-
-                      Parent
-
-                   
-
-
-                    </div>
+                 
 
 
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="button">
                                 {{ __('Register') }}
                             </button>
                         </div>

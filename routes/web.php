@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 
 Route::get('/','WelcomeController@welcome')->name('welcome'); 
 
@@ -45,12 +48,23 @@ Route::post('/teacher/new_student_handle', 'TeacherController@new_student_handle
 Route::post('/teacher/new_student_handle_manual', 'TeacherController@new_student_handle')->name('teacher.new_student_handle_manual');
 Route::get('/teacher/invite_parent/{student}', 'TeacherController@inviteParent')->name('teacher.inviteParent');
 Route::post('/teacher/invite_parent_handle', 'TeacherController@inviteParentHandle')->name('teacher.inviteParentHandle');
+Route::get('/teacher/viewStudent/{student}', 'TeacherController@studentView')->name('teacher.studentView');
+Route::post('/teacher/editStudentAccount', 'TeacherController@editStudentAccount')->name('teacher.editStudentAccount');
+Route::post('/teacher/editStudentProfile', 'TeacherController@editStudentProfile')->name('teacher.editStudentProfile');
+
+Route::get('/teacher/deleteStudentParent/{parent}', 'TeacherController@deleteStudentParent')->name('teacher.deleteStudentParent');
+Route::get('/teacher/deleteStudent/{student}', 'TeacherController@deleteStudent')->name('teacher.deleteStudent');
 
 //student controllers
 
 Route::get('/student/home', 'StudentController@home')->name('student.home');
 
+Route::get('/student/favorite_book_handle/{book}', 'StudentController@favoriteBookHandle')->name('student.favoriteBookHandle');
+
+Route::get('/student/favorite_books', 'StudentController@favoriteBook')->name('student.favoriteBook');
+
 Route::get('/student/readBook/{book}', 'StudentController@readBook')->name('student.readBook');
+Route::get('/student/books', 'StudentController@allBooks')->name('student.allBooks');
 
 //subscribe routes
 
@@ -66,6 +80,9 @@ Route::get('/plans', 'SubscriptionController@plans')->name('subscription.plans')
 
 
 Route::get('/invited_parent/home', 'invitedParentController@home')->name('invitedParent.home');
+
+
+Route::get('/invited_parent/my-kid', 'invitedParentController@myKid')->name('invitedParent.myKid');
 Route::get('/invited_parent/complete_profile', 'invitedController@complete_registration')->name('invited.complete_registration');
 Route::post('/invited_parent/complete_registration_handle', 'invitedParentController@complete_registration_handle')->name('invitedParent.complete_registration_handle');
 
@@ -86,9 +103,34 @@ Route::group(['prefix' => 'messages'], function () {
 
 
 Route::get('/Quiz/{book}', 'QuizzerController@home')->name('quizzer.home');
-Route::get('/Quiz/question', 'QuizzerController@question')->name('quizzer.question');
+//Route::get('/Quiz/question', 'QuizzerController@question')->name('quizzer.question');
 Route::post('/Quiz/question_handle', 'QuizzerController@question_handle')->name('quizzer.question_handle');
 Route::post('/Quiz/final_handle', 'QuizzerController@final_handle')->name('quizzer.final_handle');
-Route::get('/Quiz/review', 'QuizzerController@review')->name('quizzer.review');
-
+Route::post('/Quiz/final', 'QuizzerController@final')->name('quizzer.final');
+Route::get('/Quiz/review/{book}', 'QuizzerController@review')->name('quizzer.review');
+Route::get('quiz/my-quizzes', 'QuizzerController@studentQuizzes')->name('quizzer.studentQuizzes');
 Route::get('/Quiz/questions/{book}', 'QuizzerController@question')->name('quizzer.question');
+
+
+//// accounts
+
+//$user_type=Auth::user()->userable_type;
+//if($userable_type=="App\Student"){
+
+   // $userable_type="student";   
+//}
+//else{
+
+   // $userable_type="user";   
+//};
+Route::get('/accounts/profile', 'AccountsController@profile')->name('accounts.profile');
+//Route::post('/accounts/editProfile','AccountsController@edit')->name('accounts.editProfile');
+Route::post('/accounts/editProfile', 'AccountsController@edit')->name('accounts.editProfile');
+Route::get('/accounts/changeAvatar', 'AccountsController@changeAvatar')->name('accounts.changeAvatar');
+Route::get('/accounts/changePesonalInfo', 'AccountsController@changePesonalInfo')->name('accounts.changePesonalInfo');
+
+/// parent 
+
+Route::get('/parent/home', 'ParentController@home')->name('parent.home');
+
+

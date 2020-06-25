@@ -8,24 +8,88 @@
 <div style="margin-top:100px" class="container">
     <div class="row justify-content-center">
 
-@foreach($books as $book)
-
-<div class="col-md-6">
+        
+        <div class="col-md-6">
             
-  <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="{{ Voyager::image($book->cover) }}" alt="Card image cap">
-      <div class="card-body">
-      <h5 class="card-title">{{$book->name}}</h5>
-      <p class="card-text">{{$book->summary}}</p>
-      <a href="{{route('student.readBook', $book->id)}}" class="button" >Read</a>
-      </div>
+            <div class="card ">
+           
+
+
+                <div class="card-body">
+            <?php 
+            $file = (json_decode($book->book)[0]->download_link);
+            ?>
+            <embed  src="{{ Voyager::image($file) }}" height="600px"  width="100%"/> 
+            
+        </div>
     </div>
+      </div>
+              
+            
+          
+            
+            
+              
+
+        <div class="col-md-6">
+
+
+
   
-@endforeach
-       
+            <div class="card ">
+           
 
 
+                <div class="card-body">
+
+<?php  $count=1; ?>
+
+              
+                
+                
+                    @foreach($questions as $q)
+                
+                      <p><h3> <strong> {{$count++}}.{{$q->question}} ?  </strong></h3></p> 
+                      
+
+                      @foreach($q->choices as $c)
+                      <div class="alert alert-light"> 
+
+                      <div class="form-check">
+                       
+
+                        
+                         <label class="form-check-label  @if($c->isCorrect==1) text-success  @else text-danger @endif" for="{{$c->choice}}">
+                            {{$c->choice}}
+                        </label>
+                        
+                      
+                      </div>
+
+                    </div>
+                   
+                    @endforeach
+                     
+                    
+                  
+                  
+
+                     
+                        @endforeach
+
+                   
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+</div>
+
+
+  
+    
+ 
+
 
 @endsection
